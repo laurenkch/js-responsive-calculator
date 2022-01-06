@@ -1,10 +1,14 @@
 const nums = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
-const e = document.querySelector('.equal-sign');
-console.log('e');
+const equal = document.querySelector('.equal-sign');
+var calculation = [];
+
+
+//alerts commented out. 
 
 function pushNumber (event) {
-        alert(this.value);
+        // alert(this.value);
+        calculation.push(this.value);
 };
 
 nums.forEach(function (num) {
@@ -12,7 +16,8 @@ nums.forEach(function (num) {
 });
 
 function pushOperator (event) {
-        alert(this.value);
+//         alert(this.value);
+            calculation.push(this.value);
 };
 
 operators.forEach(function (operator) {
@@ -22,5 +27,7 @@ operators.forEach(function (operator) {
 function calculate (event) {
     alert("=");
 };
+equal.addEventListener('click', this.calculate);
 
-e.addEventListener('click', this.calculate);
+console.log(calculation);
+
