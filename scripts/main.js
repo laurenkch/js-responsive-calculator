@@ -8,42 +8,33 @@ const clear = document.querySelector('.clear');
 var display = document.querySelector('.calculator-screen');
 var calculation = [];
 
-//CHANGE DISPLAY TO CALULATIONS
+//EVENT LISTENERS
+numButtons.forEach(function (num) {
+    num.addEventListener('click', this.pushNumber);
+});
+opButtons.forEach(function (operator) {
+    operator.addEventListener('click', this.pushOperator);
+})
+clear.addEventListener('click', this.clearDisplay);
+equalButton.addEventListener('click', this.calculate);
 
-function changeDisplay(value) {
-    display.value = calculation.join('');
-}
-
-//NUMBER BUTTONS
+//CHANGE DISPLAY FUNCTIONS
 
 function pushNumber (event) {
         calculation.push(this.value);
         changeDisplay();
 };
-
-numButtons.forEach(function (num) {
-    num.addEventListener('click', this.pushNumber);
-});
-
-//OPERATOR BUTTONS
-
 function pushOperator (event) {
             calculation.push(this.value);
             changeDisplay();
 };
-
-opButtons.forEach(function (operator) {
-    operator.addEventListener('click', this.pushOperator);
-})
-
-//CLEAR FUNCTION
-
 function clearDisplay(event) {
     calculation = [];
-    changeDisplay();
+    display.value = "0";
 }
-
-clear.addEventListener('click', this.clearDisplay);
+function changeDisplay(value) {
+    display.value = calculation.join('');
+}
 
 //CALCULATIONS
 
@@ -56,19 +47,17 @@ function calculate (arr) {
     var digit2 = [];
     var result = '0';
 
+console.log(calculation);
+
 for (let i = 0; i < arr.length; i++) {
-    if (numbers.includes(arr[i])) {
-        digit1.push(arr[i]);
+    if (operators.includes(arr[i])) {
+        op = arr[i];
+        var digit2 = digit1;
+        var digit1 = [];
     } else {
-            op = arr[i];
-            var digit2 = digit1;
-            var digit1 = [];
+                digit1.push(arr[i]);
     };
 };
-
-console.log(digit2);
-console.log(digit1);
-console.log(op);
 
 digit2 = digit2.join('');
 digit1 = digit1.join('');
@@ -90,15 +79,19 @@ if (op === '+'){
 }else if (op === '/') {
     result = digit2 / digit1;
 }
-display.value = result;
 console.log(result);
+console.log(calculation);
+
+calculation = [];
+calculation.push(result);
+
+console.log(calculation);
+
 digit1 = [];
 op = '';
 digit2 = [];
-
+changeDisplay();
 };
 
-equalButton.addEventListener('click', this.calculate);
 
-// SHOW RESULTS
 
