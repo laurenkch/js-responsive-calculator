@@ -6,10 +6,12 @@ const opButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('.equal-sign');
 const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
+const percentButton = document.querySelector('.percent');
+const decimalButton = document.querySelector('.decimal')
 var display = document.querySelector('.calculator-screen');
 var calculation = [];
 var displayArr = [];
-let operators = "+-*/"; 
+const operators = "+-*/"; 
 
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
@@ -21,6 +23,8 @@ opButtons.forEach(function (operator) {
 clear.addEventListener('click', this.clearDisplay);
 equalButton.addEventListener('click', this.calculate);
 posNegButton.addEventListener('click', togglePosNeg);
+decimalButton.addEventListener('click', this.addADecimal);
+// percentButton.addEventListener('click', changeToPercent);
 
 //CHANGE DISPLAY FUNCTION
 
@@ -30,10 +34,12 @@ function changeDisplay(event) {
 
 //BUTTON FUNCTIONS
 
-function pushNumber (event) {
+function pushNumber (event) { 
+    if (displayArr[0] !== undefined) {
         calculation.push(displayArr[0]);
-        displayArr = [this.value];
-        changeDisplay();
+    };
+    displayArr = [this.value];
+    changeDisplay();
 };
 function pushOperator (event) {
             calculation.push(displayArr[0]);
@@ -47,9 +53,9 @@ function clearDisplay(event) {
 }
 
 function togglePosNeg (event) {
-    // console.log(displayArr[0]);
     let num = displayArr[0];
-
+    num = num.toString();
+    // console.log(num);
     switch (num) {
         case '-':
         case '+':
@@ -62,11 +68,36 @@ function togglePosNeg (event) {
         } else {
         displayArr[0]=`-${displayArr[0]}`;
         };
-        // console.log(displayArr[0]);
         changeDisplay();
+        // console.log (num);
         break;
     };
 };
+
+//DECIMAL
+
+
+
+
+
+
+// function addADecimal (event) {
+//     displayArr
+
+
+// };
+
+// //CHANGE TO PERCENT
+// function changeToPercent () {
+//     let num = displayArr.join('');
+//      num = parseInt(num);
+//     if (Number.isInteger(num)) {
+//     displayArr[0] = displayArr[0]*0.01;
+//     changeDisplay();
+// };
+// };
+
+//EQUAL SIGN ACTIONS
 
 function calculate (arr) {
     calculation.push(displayArr[0]);
@@ -83,7 +114,7 @@ for (let i = 0; i < arr.length; i++) {
         var digit2 = digit1;
         var digit1 = [];
     } else {
-                digit1.push(arr[i]);
+        digit1.push(arr[i]);
     };
 };
 
@@ -111,8 +142,6 @@ console.log(result);
 console.log(calculation);
 
 calculation = [];
-calculation.push(result);
-
 displayArr = [];
 displayArr.push(result);
 
