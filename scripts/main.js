@@ -1,15 +1,24 @@
+
+//removed alerts as I went along. 
+
 const numButtons = document.querySelectorAll('.number');
 const opButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('.equal-sign');
-var calculation = [];
 const clear = document.querySelector('.clear');
+var display = document.querySelector('.calculator-screen');
+var calculation = [];
 
-//alerts are commented out. 
+//CHANGE DISPLAY TO CALULATIONS
+
+function changeDisplay(value) {
+    display.value = calculation.join('');
+}
+
 //NUMBER BUTTONS
 
 function pushNumber (event) {
-        alert(this.value);
         calculation.push(this.value);
+        changeDisplay();
 };
 
 numButtons.forEach(function (num) {
@@ -19,8 +28,8 @@ numButtons.forEach(function (num) {
 //OPERATOR BUTTONS
 
 function pushOperator (event) {
-        alert(this.value);
             calculation.push(this.value);
+            changeDisplay();
 };
 
 opButtons.forEach(function (operator) {
@@ -28,19 +37,20 @@ opButtons.forEach(function (operator) {
 })
 
 //CLEAR FUNCTION
+
 function clearDisplay(event) {
     calculation = [];
-    alert('clear');
+    changeDisplay();
 }
 
 clear.addEventListener('click', this.clearDisplay);
 
-//ACTUAL CALCULATIONS
+//CALCULATIONS
 
 function calculate (arr) {
     var arr = calculation;
     let operators = "+-*/"; 
-    let numbers = '123456789'
+    let numbers = '0123456789'
     var digit1 = [];
     var op = '';
     var digit2 = [];
@@ -72,15 +82,16 @@ console.log(op);
 
 if (op === '+'){
     result = digit2 + digit1;
+    changeDisplay();
 } else if (op === '-') {
-    result = (digit2 - digit1);
+    result = digit2 - digit1;
 } else if (op === '*') {
-    result = (digit2 * digit1);
+    result = digit2 * digit1;
 }else if (op === '/') {
     result = digit2 / digit1;
 }
+display.value = result;
 console.log(result);
-alert(result);
 digit1 = [];
 op = '';
 digit2 = [];
@@ -89,4 +100,5 @@ digit2 = [];
 
 equalButton.addEventListener('click', this.calculate);
 
-// console.log(calculation);
+// SHOW RESULTS
+
