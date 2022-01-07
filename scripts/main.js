@@ -1,92 +1,92 @@
-const nums = document.querySelectorAll('.number');
-const operators = document.querySelectorAll('.operator');
-const equal = document.querySelector('.equal-sign');
+const numButtons = document.querySelectorAll('.number');
+const opButtons = document.querySelectorAll('.operator');
+const equalButton = document.querySelector('.equal-sign');
 var calculation = [];
+const clear = document.querySelector('.clear');
 
-
-//alerts commented out. 
+//alerts are commented out. 
+//NUMBER BUTTONS
 
 function pushNumber (event) {
         alert(this.value);
         calculation.push(this.value);
 };
 
-nums.forEach(function (num) {
+numButtons.forEach(function (num) {
     num.addEventListener('click', this.pushNumber);
 });
+
+//OPERATOR BUTTONS
 
 function pushOperator (event) {
         alert(this.value);
             calculation.push(this.value);
 };
 
-operators.forEach(function (operator) {
+opButtons.forEach(function (operator) {
     operator.addEventListener('click', this.pushOperator);
 })
 
-// function adds() {
-    
-// }
+//CLEAR FUNCTION
+function clearDisplay(event) {
+    calculation = [];
+    alert('clear');
+}
+
+clear.addEventListener('click', this.clearDisplay);
+
+//ACTUAL CALCULATIONS
+
 function calculate (arr) {
-    let operators = "+-*/c"; 
+    var arr = calculation;
+    let operators = "+-*/"; 
     let numbers = '123456789'
-    var empty = [];
+    var digit1 = [];
     var op = '';
-    var full = [];
+    var digit2 = [];
+    var result = '0';
 
 for (let i = 0; i < arr.length; i++) {
-    if (operators.includes(arr[i])) {
-        op = arr[i];
-        var full = empty;
-        var empty = [];
+    if (numbers.includes(arr[i])) {
+        digit1.push(arr[i]);
     } else {
-            empty.push(arr[i]);
+            op = arr[i];
+            var digit2 = digit1;
+            var digit1 = [];
     };
-if (op = "+"){
-    result = full.join + empty.join;
-    alert(result);
-} else if (op = "-") {
-    result = full.join - empty.join;
-    alert(result);
-} else if (op = "*") {
-    result = full.join * empty.join;
-    alert(result);
-}else if (op = "/") {
-    result = full.join/empty.join;
-    alert(result);
-}else if (op = "C") {
-    result = 0;
-    alert(result);
-}
-empty = [];
-op = '';
-full = [];
-
-}
-
-
-// console.log(arr);
 };
 
+console.log(digit2);
+console.log(digit1);
+console.log(op);
 
+digit2 = digit2.join('');
+digit1 = digit1.join('');
 
+digit2 = parseInt(digit2);
+digit1 = parseInt(digit1);
 
+console.log(digit2);
+console.log(digit1);
+console.log(op);
 
-//     let result = 0;
-//     if (calculation[i] === "+") {
-//      result = calculation[0] + calculation[2]; 
-//     } if (calculation[i] === "-") {
-//         result = calculation[0] - calculation[3];
-//     } if (calculation[i] === "*") {
-//         result = calculation[0] * calculation[3];
-//     } if (calculation[i] === "/") {
-//         result = calculation[0]/calculation[3];
-//     } if (calculation[i] === "C") {
-//         result = 0;
-//     }
-//     alert(result);
-// }
-// }
-equal.addEventListener('click', this.calculate);
+if (op === '+'){
+    result = digit2 + digit1;
+} else if (op === '-') {
+    result = (digit2 - digit1);
+} else if (op === '*') {
+    result = (digit2 * digit1);
+}else if (op === '/') {
+    result = digit2 / digit1;
+}
+console.log(result);
+alert(result);
+digit1 = [];
+op = '';
+digit2 = [];
+
+};
+
+equalButton.addEventListener('click', this.calculate);
 
 // console.log(calculation);
