@@ -24,7 +24,7 @@ clear.addEventListener('click', this.clearDisplay);
 equalButton.addEventListener('click', this.calculate);
 posNegButton.addEventListener('click', togglePosNeg);
 decimalButton.addEventListener('click', this.addADecimal);
-// percentButton.addEventListener('click', changeToPercent);
+percentButton.addEventListener('click', changeToPercent);
 
 //CHANGE DISPLAY FUNCTION
 
@@ -97,20 +97,22 @@ function togglePosNeg (event) {
 
 // };
 
-// //CHANGE TO PERCENT
-// function changeToPercent () {
-//     let num = displayArr.join('');
-//      num = parseInt(num);
-//     if (Number.isInteger(num)) {
-//     displayArr[0] = displayArr[0]*0.01;
-//     changeDisplay();
-// };
-// };
+//CHANGE TO PERCENT
+function changeToPercent () {
+    let num = displayArr.join('');
+     num = parseInt(num);
+    if (Number.isInteger(num)) {
+    displayArr[0] = displayArr[0]*0.01;
+    changeDisplay();
+};
+};
 
 //EQUAL SIGN ACTIONS
 
 function calculate (arr) {
-    calculation.push(displayArr[0]);
+    for (let x = 0; x < displayArr.length; x++) {
+        calculation.push(displayArr[x]);
+    };
     console.log(calculation);
     var arr = calculation;
     var digit1 = [];
