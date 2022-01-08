@@ -23,7 +23,7 @@ opButtons.forEach(function (operator) {
 clear.addEventListener('click', this.clearDisplay);
 equalButton.addEventListener('click', this.calculate);
 posNegButton.addEventListener('click', togglePosNeg);
-decimalButton.addEventListener('click', this.addADecimal);
+decimalButton.addEventListener('click', this.addDecimal);
 percentButton.addEventListener('click', changeToPercent);
 
 //CHANGE DISPLAY FUNCTION
@@ -86,22 +86,16 @@ function togglePosNeg (event) {
 
 //DECIMAL
 
-
-
-
-
-
-// function addADecimal (event) {
-//     displayArr
-
-
-// };
+function addDecimal (event) {
+    displayArr.push(".");
+    changeDisplay();
+};
 
 //CHANGE TO PERCENT
 function changeToPercent () {
     let num = displayArr.join('');
-     num = parseInt(num);
-    if (Number.isInteger(num)) {
+     num = parseFloat(num);
+    if (Number.isNaN(num)=== false) {
     displayArr[0] = displayArr[0]*0.01;
     changeDisplay();
 };
@@ -133,8 +127,11 @@ for (let i = 0; i < arr.length; i++) {
 digit2 = digit2.join('');
 digit1 = digit1.join('');
 
-digit2 = parseInt(digit2);
-digit1 = parseInt(digit1);
+console.log(digit2);
+console.log(digit1);
+
+digit2 = parseFloat(digit2);
+digit1 = parseFloat(digit1);
 
 console.log(digit2);
 console.log(digit1);
