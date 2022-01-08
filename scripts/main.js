@@ -35,17 +35,27 @@ function changeDisplay(event) {
 //BUTTON FUNCTIONS
 
 function pushNumber (event) { 
-    if (displayArr[0] !== undefined) {
+    if (operators.includes(displayArr[0])) {
         calculation.push(displayArr[0]);
+        displayArr = [this.value];
+    } else {
+    displayArr.push(this.value);
     };
-    displayArr = [this.value];
     changeDisplay();
+console.log(displayArr);
+console.log(calculation);
 };
+
 function pushOperator (event) {
-            calculation.push(displayArr[0]);
+        for (let x = 0; x < displayArr.length; x++) {
+            calculation.push(displayArr[x]);
+        };
             displayArr = [this.value];
             changeDisplay();
+            console.log(displayArr);
+            console.log(calculation);
 };
+
 function clearDisplay(event) {
     calculation = [];
     displayArr = [];
