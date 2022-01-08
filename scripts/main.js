@@ -47,15 +47,20 @@ console.log(calculation);
 };
 
 function pushOperator (event) {
-        for (let x = 0; x < displayArr.length; x++) {
-            calculation.push(displayArr[x]);
-        };
-            displayArr = [this.value];
-            changeDisplay();
-            console.log(displayArr);
-            console.log(calculation);
+    if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/")) {
+        calculate();
+        calculation = [displayArr];
+        displayArr = [this.value];
+    } else {
+    for (let x = 0; x < displayArr.length; x++) {
+        calculation.push(displayArr[x]);
+    };
+        displayArr = [this.value];
+        changeDisplay();
+        console.log(displayArr);
+        console.log(calculation);
+    };
 };
-
 function clearDisplay(event) {
     calculation = [];
     displayArr = [];
@@ -101,7 +106,7 @@ function changeToPercent () {
 };
 };
 
-//EQUAL SIGN ACTIONS
+//EQUAL SIGN 
 
 function calculate (arr) {
     for (let x = 0; x < displayArr.length; x++) {
