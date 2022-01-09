@@ -10,18 +10,21 @@ const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
 const percentButton = document.querySelector('.percent');
 const decimalButton = document.querySelector('.decimal')
-const squareButton  = document.querySelector('.square');
+const squareAndCubeButtons  = document.querySelectorAll('.square-cube');
 const display = document.querySelector('.calculator-screen');
 var calculation = [];
 var displayArr = [];
-const operators = "+-*/"; 
+const operators = "+-*//^"; 
 
-//does the display array include a function?
+//
+/*wanted to create a function to reduce to check if the calculation array 
+had the operator values in it, instead of writing it all out each time. 
+But couldn't get this to work the way. may come back to it.*/
 
-function operatorTest () {
-    if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
-    return true;
-}
+// function operatorTest () {
+//     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
+//     return true;
+// }
 
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
@@ -35,8 +38,9 @@ equalButton.addEventListener('click', calculate);
 posNegButton.addEventListener('click', togglePosNeg);
 decimalButton.addEventListener('click', addDecimal);
 percentButton.addEventListener('click', changeToPercent);
-squareButton.addEventListener('click', squared);
-
+squareAndCubeButtons.forEach(function (power) {
+    power.addEventListener('click', squaredNCubed);
+});
 //UPDATE DISPLAY FUNCTION
 
 function updateDisplay(event) {
@@ -57,7 +61,7 @@ console.log(displayArr);
 console.log(calculation);
 };
 
-//PRESSING FUNCTIONS
+// PRESSING FUNCTIONS
 
 function pushOperator (event) {
     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/")) {
@@ -75,6 +79,7 @@ function pushOperator (event) {
     };
 };
 
+// trying to get the operator test to work with this function. 
 
 // function pushOperator (event) {
 //     if (operatorTest()) {
@@ -109,6 +114,7 @@ function togglePosNeg (event) {
         case '+':
         case '*':
         case '/':
+        case '^':
             break;
         default: 
         if (num.includes('-')) {
@@ -117,7 +123,6 @@ function togglePosNeg (event) {
         displayArr[0]=`-${displayArr[0]}`;
         };
         updateDisplay();
-        // console.log (num);
         break;
     };
 };
@@ -184,6 +189,8 @@ if (op === '+'){
     result = digit2 * digit1;
 }else if (op === '/') {
     result = digit2 / digit1;
+} else if (op === '^') {
+    result = digit2 ** digit1;
 }
 console.log(result);
 console.log(calculation);
@@ -200,25 +207,34 @@ digit2 = [];
 updateDisplay();
 };
 
-//SQUARE FUNCTION
+//SQUARED and CUBED FUNCTIONS
 
-function squared (event) {
+function squaredNCubed (event) {
+
     for (let x = 0; x < displayArr.length; x++) {
         calculation.push(displayArr[x]);
     };
+    calculation = calculation.join('');
+    calculation = parseFloat(calculation);
+    var result = '0';
 
-calculation = calculation.join('');
-calculation = parseFloat(calculation);
-let result = calculation **2
+    switch (this.value) {
+    case 'square':
+    result = calculation**2;
+    break;
+    case 'cube':
+    result = calculation**3;
+    break;
+    };
+    calculation = [];
+    displayArr = [];
+    displayArr.push(result);
 
-calculation = [];
-displayArr = [];
-displayArr.push(result);
+    updateDisplay();
+    };
 
-updateDisplay();
-};
 
-//
+
 
 // square root
 

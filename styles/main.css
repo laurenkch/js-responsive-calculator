@@ -47,7 +47,7 @@ button:focus {
   background-color: #FF9D00;
 }
 
-.clear, .plus-minus, .percent, .square-root, .tbd {
+.clear, .plus-minus, .percent, .square-cube, .nth-power, .tbd {
   background-color: #6E6D6D;
 }
 
