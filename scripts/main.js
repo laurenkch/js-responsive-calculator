@@ -1,3 +1,5 @@
+(function() {
+    'use strict';
 
 //removed alerts as I went along. 
 
@@ -8,34 +10,40 @@ const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
 const percentButton = document.querySelector('.percent');
 const decimalButton = document.querySelector('.decimal')
-const squareRootButton  = document.querySelector('.square');
-
-var display = document.querySelector('.calculator-screen');
+const squareButton  = document.querySelector('.square');
+const display = document.querySelector('.calculator-screen');
 var calculation = [];
 var displayArr = [];
 const operators = "+-*/"; 
 
+//does the display array include a function?
+
+function operatorTest () {
+    if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
+    return true;
+}
+
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
-    num.addEventListener('click', this.pushNumber);
+    num.addEventListener ('click', pushNumber);
 });
 opButtons.forEach(function (operator) {
-    operator.addEventListener('click', this.pushOperator);
+    operator.addEventListener('click', pushOperator);
 })
-clear.addEventListener('click', this.clearDisplay);
-equalButton.addEventListener('click', this.calculate);
+clear.addEventListener('click', clearDisplay);
+equalButton.addEventListener('click', calculate);
 posNegButton.addEventListener('click', togglePosNeg);
-decimalButton.addEventListener('click', this.addDecimal);
+decimalButton.addEventListener('click', addDecimal);
 percentButton.addEventListener('click', changeToPercent);
-squareRootButton.addEventListener('click', this.square)
+squareButton.addEventListener('click', squared);
 
-//CHANGE DISPLAY FUNCTION
+//UPDATE DISPLAY FUNCTION
 
-function changeDisplay(event) {
+function updateDisplay(event) {
     display.value = displayArr.join('');
 };
 
-//BUTTON FUNCTIONS
+//PRESSING NUMBERS
 
 function pushNumber (event) { 
     if (operators.includes(displayArr[0])) {
@@ -44,10 +52,12 @@ function pushNumber (event) {
     } else {
     displayArr.push(this.value);
     };
-    changeDisplay();
+    updateDisplay();
 console.log(displayArr);
 console.log(calculation);
 };
+
+//PRESSING FUNCTIONS
 
 function pushOperator (event) {
     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/")) {
@@ -59,16 +69,36 @@ function pushOperator (event) {
         calculation.push(displayArr[x]);
     };
         displayArr = [this.value];
-        changeDisplay();
+        updateDisplay();
         console.log(displayArr);
         console.log(calculation);
     };
 };
+
+
+// function pushOperator (event) {
+//     if (operatorTest()) {
+//         calculate();
+//         calculation = [displayArr];
+//         displayArr = [this.value];
+//     } else {
+//     for (let x = 0; x < displayArr.length; x++) {
+//         calculation.push(displayArr[x]);
+//     };
+//         displayArr = [this.value];
+//         updateDisplay();
+//         console.log(displayArr);
+//         console.log(calculation);
+//     };
+// };
+
+//CLEAR DISPLAY
+
 function clearDisplay(event) {
     calculation = [];
     displayArr = [];
     display.value = "0";
-}
+};
 
 function togglePosNeg (event) {
     let num = displayArr[0];
@@ -86,7 +116,7 @@ function togglePosNeg (event) {
         } else {
         displayArr[0]=`-${displayArr[0]}`;
         };
-        changeDisplay();
+        updateDisplay();
         // console.log (num);
         break;
     };
@@ -96,7 +126,7 @@ function togglePosNeg (event) {
 
 function addDecimal (event) {
     displayArr.push(".");
-    changeDisplay();
+    updateDisplay();
 };
 
 //CHANGE TO PERCENT
@@ -105,7 +135,7 @@ function changeToPercent () {
      num = parseFloat(num);
     if (Number.isNaN(num)=== false) {
     displayArr[0] = displayArr[0]*0.01;
-    changeDisplay();
+    updateDisplay();
 };
 };
 
@@ -147,7 +177,7 @@ console.log(op);
 
 if (op === '+'){
     result = digit2 + digit1;
-    changeDisplay();
+    updateDisplay();
 } else if (op === '-') {
     result = digit2 - digit1;
 } else if (op === '*') {
@@ -167,26 +197,48 @@ displayArr.push(result);
 digit1 = [];
 op = '';
 digit2 = [];
-changeDisplay();
+updateDisplay();
 };
 
-//SQUARE ROOT
+//SQUARE FUNCTION
 
-function square (arr) {
+function squared (event) {
     for (let x = 0; x < displayArr.length; x++) {
         calculation.push(displayArr[x]);
     };
 
 calculation = calculation.join('');
 calculation = parseFloat(calculation);
-let result = Math.sqrt(calculation);
+let result = calculation **2
 
 calculation = [];
 displayArr = [];
 displayArr.push(result);
 
-changeDisplay();
+updateDisplay();
 };
 
 //
 
+// square root
+
+// function square (arr) {
+//     for (let x = 0; x < displayArr.length; x++) {
+//         calculation.push(displayArr[x]);
+//     };
+
+// calculation = calculation.join('');
+// calculation = parseFloat(calculation);
+// let result = Math.sqrt(calculation);
+
+// calculation = [];
+// displayArr = [];
+// displayArr.push(result);
+
+// updateDisplay();
+// };
+
+// //
+
+
+})();
