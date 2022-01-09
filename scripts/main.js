@@ -254,6 +254,15 @@ function oneDigitCalculations (event) {
     case 'tan':
     result = Math.tan(calculation);
     break;
+    case 'sinh':
+    result = Math.sinh(calculation);
+    break;
+    case 'cosh':
+    result = Math.cosh(calculation);
+    break;
+    case 'tanh':
+    result = Math.tanh(calculation);
+    break;
     };
     calculation = [];
     displayArr = [];
