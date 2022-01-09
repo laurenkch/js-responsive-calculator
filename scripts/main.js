@@ -8,6 +8,8 @@ const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
 const percentButton = document.querySelector('.percent');
 const decimalButton = document.querySelector('.decimal')
+const squareRootButton  = document.querySelector('.square');
+
 var display = document.querySelector('.calculator-screen');
 var calculation = [];
 var displayArr = [];
@@ -25,6 +27,7 @@ equalButton.addEventListener('click', this.calculate);
 posNegButton.addEventListener('click', togglePosNeg);
 decimalButton.addEventListener('click', this.addDecimal);
 percentButton.addEventListener('click', changeToPercent);
+squareRootButton.addEventListener('click', this.square)
 
 //CHANGE DISPLAY FUNCTION
 
@@ -167,5 +170,23 @@ digit2 = [];
 changeDisplay();
 };
 
+//SQUARE ROOT
 
+function square (arr) {
+    for (let x = 0; x < displayArr.length; x++) {
+        calculation.push(displayArr[x]);
+    };
+
+calculation = calculation.join('');
+calculation = parseFloat(calculation);
+let result = Math.sqrt(calculation);
+
+calculation = [];
+displayArr = [];
+displayArr.push(result);
+
+changeDisplay();
+};
+
+//
 
