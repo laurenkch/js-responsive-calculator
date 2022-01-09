@@ -16,7 +16,7 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
+  width: 400px;
 }
 
 .calculator-screen {
@@ -47,15 +47,15 @@ button:focus {
   background-color: #FF9D00;
 }
 
-.clear, .plus-minus, .percent, .square-cube, .nth-power, .tbd {
+.clear, .plus-minus, .percent, .one-touch,.tbd {
   background-color: #6E6D6D;
 }
 
 .calculator-keys {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .btn-lg {
-  grid-column: 2 / 4;
+  grid-column: 4 / 6;
 }

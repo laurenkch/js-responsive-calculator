@@ -10,11 +10,11 @@ const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
 const percentButton = document.querySelector('.percent');
 const decimalButton = document.querySelector('.decimal')
-const squareAndCubeButtons  = document.querySelectorAll('.square-cube');
+const oneDigitCalculationButtons  = document.querySelectorAll('.one-touch');
 const display = document.querySelector('.calculator-screen');
 var calculation = [];
 var displayArr = [];
-const operators = "+-*//^"; 
+const operators = `+-*//^rt()`; 
 
 //
 /*wanted to create a function to reduce to check if the calculation array 
@@ -38,9 +38,10 @@ equalButton.addEventListener('click', calculate);
 posNegButton.addEventListener('click', togglePosNeg);
 decimalButton.addEventListener('click', addDecimal);
 percentButton.addEventListener('click', changeToPercent);
-squareAndCubeButtons.forEach(function (power) {
-    power.addEventListener('click', squaredNCubed);
+oneDigitCalculationButtons.forEach(function (sym) {
+    sym.addEventListener('click', oneDigitCalculations);
 });
+
 //UPDATE DISPLAY FUNCTION
 
 function updateDisplay(event) {
@@ -115,6 +116,7 @@ function togglePosNeg (event) {
         case '*':
         case '/':
         case '^':
+        case `rt()`:  
             break;
         default: 
         if (num.includes('-')) {
@@ -144,7 +146,7 @@ function changeToPercent () {
 };
 };
 
-//EQUAL SIGN 
+//EQUALS BUTTON
 
 function calculate (arr) {
     for (let x = 0; x < displayArr.length; x++) {
@@ -191,7 +193,16 @@ if (op === '+'){
     result = digit2 / digit1;
 } else if (op === '^') {
     result = digit2 ** digit1;
-}
+} else if (op === `rt()`) { 
+    if (Math.sign(digit2)=== -1 && digit1 % 2 !== 0) {
+        digit2 = digit2 * -1;
+        result = digit2 ** (1/digit1);
+        result = result * -1;
+    } else {
+    result = digit2 ** (1/digit1);
+    } 
+};
+
 console.log(result);
 console.log(calculation);
 
@@ -207,9 +218,9 @@ digit2 = [];
 updateDisplay();
 };
 
-//SQUARED and CUBED FUNCTIONS
+//ONE DIGIT FUNCTIONS
 
-function squaredNCubed (event) {
+function oneDigitCalculations (event) {
 
     for (let x = 0; x < displayArr.length; x++) {
         calculation.push(displayArr[x]);
@@ -225,6 +236,24 @@ function squaredNCubed (event) {
     case 'cube':
     result = calculation**3;
     break;
+    case 'square-root':
+    result = Math.sqrt(calculation);
+    break;
+    case 'cube-root':
+    result = Math.cbrt(calculation);
+    break;
+    case 'log':
+    result = Math.log10(calculation);
+    break;
+    case 'sin':
+    result = Math.sin(calculation);
+    break;
+    case 'cos':
+    result = Math.cos(calculation);
+    break;
+    case 'tan':
+    result = Math.tan(calculation);
+    break;
     };
     calculation = [];
     displayArr = [];
@@ -233,28 +262,6 @@ function squaredNCubed (event) {
     updateDisplay();
     };
 
-
-
-
-// square root
-
-// function square (arr) {
-//     for (let x = 0; x < displayArr.length; x++) {
-//         calculation.push(displayArr[x]);
-//     };
-
-// calculation = calculation.join('');
-// calculation = parseFloat(calculation);
-// let result = Math.sqrt(calculation);
-
-// calculation = [];
-// displayArr = [];
-// displayArr.push(result);
-
-// updateDisplay();
-// };
-
-// //
 
 
 })();
