@@ -4,7 +4,9 @@
 //removed alerts as I went along. 
 
 const numButtons = document.querySelectorAll('.number');
+const otherNumButtons = document.querySelectorAll('.number2');
 const opButtons = document.querySelectorAll('.operator');
+const otherOpButtons = document.querySelectorAll('.operator2');
 const equalButton = document.querySelector('.equal-sign');
 const clear = document.querySelector('.clear');
 const posNegButton = document.querySelector('.plus-minus');
@@ -23,16 +25,22 @@ var memory = [];
 had the operator values in it, instead of writing it all out each time. 
 But couldn't get this to work the way. may come back to it.*/
 
-function operatorTest () {
-    if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
-    return true;
-};
+// function operatorTest () {
+//     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
+//     return true;
+// };
 
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
     num.addEventListener ('click', pushNumber);
 });
+otherNumButtons.forEach(function (num) {
+    num.addEventListener ('click', pushNumber);
+});
 opButtons.forEach(function (operator) {
+    operator.addEventListener('click', pushOperator);
+})
+otherOpButtons.forEach(function (operator) {
     operator.addEventListener('click', pushOperator);
 })
 clear.addEventListener('click', clearDisplay);

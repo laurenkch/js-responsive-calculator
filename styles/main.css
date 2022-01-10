@@ -47,7 +47,7 @@ button:focus {
   background-color: #FF9D00;
 }
 
-.clear, .plus-minus, .percent, .one-touch,.tbd {
+.clear, .plus-minus, .percent, .one-touch, .operator2, .number2 {
   background-color: #6E6D6D;
 }
 
