@@ -24,7 +24,7 @@ But couldn't get this to work the way. may come back to it.*/
 // function operatorTest () {
 //     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
 //     return true;
-// }
+// };
 
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
@@ -48,7 +48,24 @@ function updateDisplay(event) {
     display.value = displayArr.join('');
 };
 
-//PRESSING NUMBERS
+//TEST FOR PI
+function searchForPi () {
+var index = displayArr.indexOf('pi');
+if (index !== -1) {
+displayArr[index] = Math.PI;
+}; 
+};
+
+//TEST FOR e
+
+function searchForE () {
+    var index = displayArr.indexOf('e');
+    if (index !== -1) {
+    displayArr[index] = Math.E;
+    }; 
+    };
+
+//PRESSING NUMBER BUTTONS
 
 function pushNumber (event) { 
     if (operators.includes(displayArr[0])) {
@@ -57,12 +74,15 @@ function pushNumber (event) {
     } else {
     displayArr.push(this.value);
     };
+    searchForPi();
+    searchForE();
     updateDisplay();
 console.log(displayArr);
 console.log(calculation);
 };
 
-// PRESSING FUNCTIONS
+
+// PRESSING FUNCTION BUTTONS
 
 function pushOperator (event) {
     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/")) {
@@ -83,7 +103,7 @@ function pushOperator (event) {
 // trying to get the operator test to work with this function. 
 
 // function pushOperator (event) {
-//     if (operatorTest()) {
+//     if (operatorTest() === 'true') {
 //         calculate();
 //         calculation = [displayArr];
 //         displayArr = [this.value];
@@ -146,7 +166,7 @@ function changeToPercent () {
 };
 };
 
-//EQUALS BUTTON
+// = BUTTON
 
 function calculate (arr) {
     for (let x = 0; x < displayArr.length; x++) {
@@ -194,13 +214,15 @@ if (op === '+'){
 } else if (op === '^') {
     result = digit2 ** digit1;
 } else if (op === `rt()`) { 
-    if (Math.sign(digit2)=== -1 && digit1 % 2 !== 0) {
-        digit2 = digit2 * -1;
-        result = digit2 ** (1/digit1);
-        result = result * -1;
-    } else {
+    /*this part was for caluclating roots of negative values, but for some reason it stops the continous caluclations so I am commenting it out for now. */
+
+    // if (Math.sign(digit2)=== -1 && digit1 % 2 !== 0) {
+    //     digit2 = digit2 * -1;
+    //     result = digit2 ** (1/digit1);
+    //     result = result * -1;
+    // } else {
     result = digit2 ** (1/digit1);
-    } 
+    // } 
 };
 
 console.log(result);
