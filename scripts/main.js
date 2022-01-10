@@ -12,19 +12,21 @@ const percentButton = document.querySelector('.percent');
 const decimalButton = document.querySelector('.decimal')
 const oneDigitCalculationButtons  = document.querySelectorAll('.one-touch');
 const display = document.querySelector('.calculator-screen');
+const memoryFucntionButtons = document.querySelectorAll ('.memory');
 var calculation = [];
 var displayArr = [];
 const operators = `+-*//^rt()`; 
+var memory = [];
 
 //
 /*wanted to create a function to reduce to check if the calculation array 
 had the operator values in it, instead of writing it all out each time. 
 But couldn't get this to work the way. may come back to it.*/
 
-// function operatorTest () {
-//     if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
-//     return true;
-// };
+function operatorTest () {
+    if (calculation.includes("-") || calculation.includes("+") || calculation.includes("*") || calculation.includes("/"));
+    return true;
+};
 
 //EVENT LISTENERS
 numButtons.forEach(function (num) {
@@ -41,6 +43,9 @@ percentButton.addEventListener('click', changeToPercent);
 oneDigitCalculationButtons.forEach(function (sym) {
     sym.addEventListener('click', oneDigitCalculations);
 });
+memoryFucntionButtons.forEach(function(mem){
+    mem.addEventListener('click', memoryFunctions)
+})
 
 //UPDATE DISPLAY FUNCTION
 
@@ -166,7 +171,7 @@ function changeToPercent () {
 };
 };
 
-// = BUTTON
+// EQUALS BUTTON
 
 function calculate (arr) {
     for (let x = 0; x < displayArr.length; x++) {
@@ -204,7 +209,6 @@ console.log(op);
 
 if (op === '+'){
     result = digit2 + digit1;
-    updateDisplay();
 } else if (op === '-') {
     result = digit2 - digit1;
 } else if (op === '*') {
@@ -293,6 +297,57 @@ function oneDigitCalculations (event) {
     updateDisplay();
     };
 
+//Memory buttons
+//gets a little funny with negatives, but will come back to that. 
 
+function memoryFunctions (event) {
+    let result = 0;
+
+    switch (this.value) {
+        case 'ms':
+        for (let x = 0; x < displayArr.length; x++) {
+                memory.push(displayArr[x]);
+            };
+        console.log(memory);
+        break;
+
+        case 'mc':
+        memory = [];
+        updateDisplay;
+        break;
+
+        case 'mr':
+        if (operators.includes(displayArr[0])) {
+            calculation.push(displayArr[0]);
+            displayArr = [];
+            displayArr = memory;
+        } else {
+        memory = memory.join('');
+        memory = parseInt(memory);
+        displayArr.push(memory);
+        };
+        display.value = displayArr
+        break;
+
+        case 'm+':
+            for (let x = 0; x < displayArr.length; x++) {
+                calculation.push(displayArr[x]);
+            };
+        memory = memory.join('');
+        calculation = calculation.join('');
+        memory = parseFloat(memory);
+        calculation = parseFloat(calculation);
+
+        result = calculation + memory;
+        
+        calculation = [];
+        displayArr = [];
+        memory = [memory];
+        displayArr.push(result);
+
+        updateDisplay();
+        break;
+    }; 
+};
 
 })();

@@ -53,9 +53,13 @@ button:focus {
 
 .calculator-keys {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
 }
 
 .btn-lg {
   grid-column: 4 / 6;
+}
+
+.equal-sign {
+  grid-column: 7 / 9;
 }
