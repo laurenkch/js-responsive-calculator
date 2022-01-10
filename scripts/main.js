@@ -82,8 +82,6 @@ function pushNumber (event) {
     searchForPi();
     searchForE();
     updateDisplay();
-console.log(displayArr);
-console.log(calculation);
 };
 
 
@@ -100,8 +98,6 @@ function pushOperator (event) {
     };
         displayArr = [this.value];
         updateDisplay();
-        console.log(displayArr);
-        console.log(calculation);
     };
 };
 
@@ -177,7 +173,6 @@ function calculate (arr) {
     for (let x = 0; x < displayArr.length; x++) {
         calculation.push(displayArr[x]);
     };
-    console.log(calculation);
     var arr = calculation;
     var digit1 = [];
     var op = '';
@@ -197,15 +192,15 @@ for (let i = 0; i < arr.length; i++) {
 digit2 = digit2.join('');
 digit1 = digit1.join('');
 
-console.log(digit2);
-console.log(digit1);
+// console.log(digit2);
+// console.log(digit1);
 
 digit2 = parseFloat(digit2);
 digit1 = parseFloat(digit1);
 
-console.log(digit2);
-console.log(digit1);
-console.log(op);
+// console.log(digit2);
+// console.log(digit1);
+// console.log(op);
 
 if (op === '+'){
     result = digit2 + digit1;
@@ -218,25 +213,18 @@ if (op === '+'){
 } else if (op === '^') {
     result = digit2 ** digit1;
 } else if (op === `rt()`) { 
-    /*this part was for caluclating roots of negative values, but for some reason it stops the continous caluclations so I am commenting it out for now. */
-
-    // if (Math.sign(digit2)=== -1 && digit1 % 2 !== 0) {
-    //     digit2 = digit2 * -1;
-    //     result = digit2 ** (1/digit1);
-    //     result = result * -1;
-    // } else {
+    if (Math.sign(digit2)=== -1 && digit1 % 2 !== 0) {
+        digit2 = digit2 * -1;
+        result = digit2 ** (1/digit1);
+        result = result * -1;
+    } else {
     result = digit2 ** (1/digit1);
-    // } 
+    } 
 };
-
-console.log(result);
-console.log(calculation);
 
 calculation = [];
 displayArr = [];
 displayArr.push(result);
-
-// console.log(calculation);
 
 digit1 = [];
 op = '';
